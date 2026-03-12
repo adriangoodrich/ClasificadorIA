@@ -1,0 +1,211 @@
+﻿<Window x:Class="ClasificadorIA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Clasificador IA de Archivos" 
+        Height="800" 
+        Width="950"
+        MinHeight="650" 
+        MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F2F5">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <Border Grid.Row="0" 
+                Background="#2C3E50" 
+                CornerRadius="8" 
+                Padding="15" 
+                Margin="0,0,0,15">
+            <TextBlock Text="📁 CLASIFICADOR IA DE ARCHIVOS" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Seleccionar carpeta -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12" 
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="📂 1. SELECCIONAR CARPETA" 
+                           FontSize="13" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,8"
+                           Foreground="#2C3E50"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="📁" FontSize="18" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" x:Name="TxtRuta" IsReadOnly="True" Padding="6" Background="#F8F9F9" 
+                             Text="Ninguna carpeta seleccionada" TextWrapping="Wrap"/>
+                    <Button Grid.Column="2" Content="Examinar" Padding="12,6" Margin="8,0,0,0" 
+                            Click="BtnExaminar_Click" Background="#27AE60" Foreground="White" 
+                            BorderThickness="0" Cursor="Hand"/>
+                </Grid>
+                <TextBlock x:Name="TxtArchivos" Margin="0,8,0,0" Foreground="#7F8C8D" 
+                           Text="0 archivos encontrados"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Modo y criterio -->
+        <Border Grid.Row="2" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12" 
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="🎯 MODO" FontSize="12" FontWeight="Bold" Margin="0,0,0,5" Foreground="#2C3E50"/>
+                    <ComboBox x:Name="ComboModo" SelectionChanged="ComboModo_SelectionChanged" Height="28"/>
+                </StackPanel>
+
+                <Grid Grid.Column="1">
+                    <Rectangle Fill="#BDC3C7" Width="1" HorizontalAlignment="Center"/>
+                </Grid>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="🔍 CRITERIO" FontSize="12" FontWeight="Bold" Margin="0,0,0,5" Foreground="#2C3E50"/>
+                    <ComboBox x:Name="ComboCriterio" SelectionChanged="ComboCriterio_SelectionChanged" Height="28"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Nivel de profundidad -->
+        <Border Grid.Row="3" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12" 
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="🎚️ 3. NIVEL DE PROFUNDIDAD" 
+                           FontSize="13" FontWeight="Bold" Margin="0,0,0,8" Foreground="#2C3E50"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <RadioButton x:Name="RbProfundidad5" Content="5 categorías" GroupName="Profundidad" IsChecked="True" Margin="0,0,20,0"/>
+                    <RadioButton x:Name="RbProfundidad10" Content="10 categorías" GroupName="Profundidad" Margin="0,0,20,0"/>
+                    <RadioButton x:Name="RbProfundidad15" Content="15 categorías" GroupName="Profundidad"/>
+                </StackPanel>
+                <TextBlock Text="(La IA intentará agrupar en aproximadamente este número de categorías)" 
+                           FontSize="11" Foreground="#7F8C8D" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Prompt -->
+        <Border Grid.Row="4" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12" 
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="🤖 4. PROMPT PARA IA" 
+                           FontSize="13" FontWeight="Bold" Margin="0,0,0,8" Foreground="#2C3E50"/>
+
+                <ScrollViewer Grid.Row="1" MaxHeight="100" VerticalScrollBarVisibility="Auto">
+                    <TextBox x:Name="TxtPromptPreview" TextWrapping="Wrap" IsReadOnly="True" 
+                             Background="#F0F0F0" Padding="5" FontFamily="Consolas" FontSize="11"/>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button Content="📋 Copiar" Padding="12,5" Margin="0,0,5,0" Click="BtnCopiarPrompt_Click" 
+                            Background="#3498DB" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                    <Button Content="💾 Guardar" Padding="12,5" Margin="5,0,0,0" Click="BtnGuardarPrompt_Click" 
+                            Background="#F39C12" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Resultados -->
+        <Border Grid.Row="5" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12" 
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="📥 5. RESPUESTA (categorías)" 
+                           FontSize="13" FontWeight="Bold" Margin="0,0,0,8" Foreground="#2C3E50"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <StackPanel x:Name="PanelCategorias" Margin="0,0,0,5"/>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button Content="📂 Cargar" Padding="12,5" Margin="0,0,5,0" Click="BtnCargarRespuesta_Click" 
+                            Background="#E67E22" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                    <Button Content="📋 Pegar" Padding="12,5" Margin="5,0,0,0" Click="BtnPegarRespuesta_Click" 
+                            Background="#9B59B6" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Acciones finales -->
+        <Border Grid.Row="6" 
+                Background="White" 
+                CornerRadius="8" 
+                Padding="12"
+                Margin="0,0,0,12"
+                BorderBrush="#BDC3C7"
+                BorderThickness="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <RadioButton x:Name="RbCopiar" Content="📋 Copiar archivos" IsChecked="True" Margin="0,0,20,0"/>
+                    <RadioButton x:Name="RbMover" Content="✂️ Mover archivos"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BtnIniciar" Content="🚀 INICIAR" Padding="25,10" Margin="5" 
+                            Click="BtnIniciar_Click" Background="#27AE60" Foreground="White" 
+                            FontWeight="Bold" BorderThickness="0" IsEnabled="False" Cursor="Hand"/>
+                    <Button x:Name="BtnCancelar" Content="❌ CANCELAR" Padding="25,10" Margin="5" 
+                            Click="BtnCancelar_Click" Background="#E74C3C" Foreground="White" 
+                            FontWeight="Bold" BorderThickness="0" Cursor="Hand"/>
+                </StackPanel>
+                <ProgressBar x:Name="ProgressBar" Height="3" Margin="0,10,0,0" 
+                             Visibility="Collapsed" Foreground="#3498DB" IsIndeterminate="True"/>
+                <TextBlock x:Name="TxtProgreso" HorizontalAlignment="Center" Margin="8" 
+                           Foreground="#7F8C8D" Visibility="Collapsed" FontSize="11"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
