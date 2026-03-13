@@ -56,11 +56,10 @@ Pantalla principal
 ### Opción 1 — Descarga directa (recomendado)
 
 1. Ve a la sección [**Releases**](https://github.com/adriangoodrich/ClasificadorIA/releases)
-2. Descarga el archivo `.zip` de la última versión
-3. Extrae el contenido en la carpeta que prefieras
-4. Ejecuta `ClasificadorIA.exe`
+2. Descarga el archivo `.exe` de la última versión
+3. Ejecuta `ClasificadorIA.exe`
 
-> **Nota:** Asegúrate de tener instalado el [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) antes de ejecutar la aplicación.
+> **Nota:** Asegúrate de tener instalado el [.NET 8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) antes de ejecutar la aplicación o descarga la version que lo trae incluido (mayor tamaño).
 
 ---
 
