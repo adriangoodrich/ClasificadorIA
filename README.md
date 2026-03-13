@@ -12,9 +12,9 @@
 
 ## 📸 Capturas de pantalla
 
-| Pantalla principal | Vista de categorías | Progreso |
-|---|---|---|
-| ![Principal](screenshots/main.png) | ![Categorias](screenshots/categories.png) | ![Progreso](screenshots/progress.png) |
+| Pantalla principal 
+|---|---|
+| ![Principal](principal.png) | ![Main](main.png) | 
 
 ---
 
