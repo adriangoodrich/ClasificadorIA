@@ -14,7 +14,7 @@
 
 Main screen
 
-![Main](Principal.png)
+![Main](Main.png)
 
 ---
 
