@@ -14,7 +14,7 @@
 
 | Pantalla principal 
 |---|---|
-| ![Principal](principal.png) | ![Main](main.png) | 
+| ![Principal](principal.png) | ![Main]([main.png](https://github.com/adriangoodrich/ClasificadorIA/blob/master/Main.png)) | 
 
 ---
 
