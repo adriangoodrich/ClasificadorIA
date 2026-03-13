@@ -12,9 +12,9 @@
 
 ## 📸 Capturas de pantalla
 
-| Pantalla principal 
-|---|---|
-| ![Principal](principal.png) | ![Main]([main.png](https://github.com/adriangoodrich/ClasificadorIA/blob/master/Main.png)) | 
+Pantalla principal 
+
+![Principal](Principal.png) 
 
 ---
 
